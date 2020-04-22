@@ -1,0 +1,11 @@
+name: busco-env
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - radsex
+  - r-sgtr
+  - sra-tools
+  - requests
+  - biopython
+  - xmltodict

@@ -1,0 +1,42 @@
+depth:
+
+distrib:
+    min-depth: 1
+    groups:
+    signif-threshold: 0.05
+    disable-correction: false
+
+freq:
+    min-depth: 1
+
+map:
+    min-depth: 1
+    groups:
+    min-quality: 20
+    min-frequency: 0.1
+    signif-threshold: 0.05
+    disable-correction: false
+
+process:
+    min-depth: 1
+
+signif:
+    min-depth: 1
+    groups:
+    signif-threshold: 0.05
+    disable-correction: false
+    output-fasta: false
+
+subset:
+    min-depth: 1
+    groups:
+    signif-threshold: 0.05
+    disable-correction: false
+    output-fasta: false
+    min-group1: 0
+    min-group2: 0
+    max-group1: 9999
+    max-group2: 9999
+    min-individuals: 0
+    max-individuals: 9999
+
