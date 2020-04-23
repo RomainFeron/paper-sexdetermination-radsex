@@ -8,7 +8,11 @@ checkpoint get_dataset:
         'benchmarks/{dataset}/get_dataset.tsv'
     log:
         'logs/{dataset}/get_dataset.txt'
-    conda: '../envs/workflow.yaml'
+    conda:
+        '../envs/workflow.yaml'
+    resources:
+        mem_mb = config['resources']['default']['mem_mb'],
+        runtime_s = config['resources']['default']['runtime_s']
     params:
         bioproject = lambda wildcards: config['info'][wildcards.dataset]['bioproject'],
         ncbi_api_key = config['ncbi']['api_key'],
@@ -39,6 +43,9 @@ rule download_dataset:
         'benchmarks/{dataset}/download_dataset.tsv'
     log:
         'logs/{dataset}/download_dataset.txt'
+    resources:
+        mem_mb = config['resources']['default']['mem_mb'],
+        runtime_s = config['resources']['default']['runtime_s']
 
 
 rule download_sample:
@@ -52,6 +59,10 @@ rule download_sample:
         'benchmarks/{dataset}/download_sample/{sample}.tsv'
     log:
         'logs/{dataset}/download_sample/{sample}.txt'
-    conda: '../envs/workflow.yaml'
+    conda:
+        '../envs/workflow.yaml'
+    resources:
+        mem_mb = config['resources']['default']['mem_mb'],
+        runtime_s = config['resources']['default']['runtime_s']
     shell:
         'fastq-dump -Z --gzip $(cat {input}) > {output} 2> {log}'
