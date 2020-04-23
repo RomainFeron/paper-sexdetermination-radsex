@@ -13,6 +13,9 @@ rule process:
         '../envs/workflow.yaml'
     threads:
         config['resources']['process']['threads']
+    resources:
+        mem_mb = config['resources']['process']['mem_mb'],
+        runtime_s = config['resources']['process']['runtime_s']
     params:
         min_depth = config['params']['process']['min-depth']
     shell:
@@ -38,12 +41,36 @@ rule depth:
         'logs/{dataset}/depth.txt'
     conda:
         '../envs/workflow.yaml'
+    resources:
+        mem_mb = config['resources']['default']['mem_mb'],
+        runtime_s = config['resources']['default']['runtime_s']
     shell:
         'radsex depth '
         '--markers-table {input.markers_table} '
         '--popmap {input.popmap} '
         '--output-file {output} '
         '2> {log}'
+
+
+rule depth_plot:
+    '''
+    '''
+    input:
+        rules.depth.output
+    output:
+        by_individual = 'results/{dataset}/depth_by_individual.png',
+        by_sex = 'results/{dataset}/depth_by_sex.png'
+    benchmark:
+        'benchmarks/{dataset}/depth_plot.tsv'
+    log:
+        'logs/{dataset}/depth_plot.txt'
+    conda:
+        '../envs/workflow.yaml'
+    resources:
+        mem_mb = config['resources']['default']['mem_mb'],
+        runtime_s = config['resources']['default']['runtime_s']
+    script:
+        '../scripts/depth.R'
 
 
 rule distrib:
@@ -60,6 +87,9 @@ rule distrib:
         'logs/{dataset}/distrib_{min_depth}.txt'
     conda:
         '../envs/workflow.yaml'
+    resources:
+        mem_mb = config['resources']['default']['mem_mb'],
+        runtime_s = config['resources']['default']['runtime_s']
     params:
         options = lambda wildcards: get_options('distrib', wildcards)
     shell:
@@ -69,6 +99,26 @@ rule distrib:
         '--output-file {output} '
         '{params.options} '
         '2> {log}'
+
+
+rule distrib_plot:
+    '''
+    '''
+    input:
+        rules.distrib.output
+    output:
+        'results/{dataset}/distrib_{min_depth}.png',
+    benchmark:
+        'benchmarks/{dataset}/distrib_{min_depth}_plot.tsv'
+    log:
+        'logs/{dataset}/distrib_{min_depth}_plot.txt'
+    conda:
+        '../envs/workflow.yaml'
+    resources:
+        mem_mb = config['resources']['default']['mem_mb'],
+        runtime_s = config['resources']['default']['runtime_s']
+    script:
+        '../scripts/distrib.R'
 
 
 rule freq:
@@ -84,6 +134,9 @@ rule freq:
         'logs/{dataset}/freq_{min_depth}.txt'
     conda:
         '../envs/workflow.yaml'
+    resources:
+        mem_mb = config['resources']['default']['mem_mb'],
+        runtime_s = config['resources']['default']['runtime_s']
     params:
         options = lambda wildcards: get_options('freq', wildcards)
     shell:
@@ -92,6 +145,26 @@ rule freq:
         '--output-file {output} '
         '{params.options} '
         '2> {log}'
+
+
+rule freq_plot:
+    '''
+    '''
+    input:
+        rules.freq.output
+    output:
+        'results/{dataset}/freq_{min_depth}.png',
+    benchmark:
+        'benchmarks/{dataset}/freq_{min_depth}_plot.tsv'
+    log:
+        'logs/{dataset}/freq_{min_depth}_plot.txt'
+    conda:
+        '../envs/workflow.yaml'
+    resources:
+        mem_mb = config['resources']['default']['mem_mb'],
+        runtime_s = config['resources']['default']['runtime_s']
+    script:
+        '../scripts/freq.R'
 
 
 rule signif:
@@ -108,6 +181,9 @@ rule signif:
         'logs/{dataset}/signif_{min_depth}.txt'
     conda:
         '../envs/workflow.yaml'
+    resources:
+        mem_mb = config['resources']['default']['mem_mb'],
+        runtime_s = config['resources']['default']['runtime_s']
     params:
         options = lambda wildcards: get_options('signif', wildcards)
     shell:
@@ -123,6 +199,7 @@ def default_workflow_input(wildcards):
     '''
     '''
     all_input_files = rules.distrib.output + rules.freq.output + rules.signif.output + rules.depth.output
+    all_input_files += rules.depth_plot.output + rules.distrib_plot.output + rules.freq_plot.output
     output = expand(all_input_files,
                     dataset=wildcards.dataset,
                     min_depth=config['params']['general']['min_depth']),
@@ -140,3 +217,6 @@ rule default_workflow:
         'benchmarks/{dataset}/default_workflow.tsv'
     log:
         'logs/{dataset}/default_workflow.txt'
+    resources:
+        mem_mb = config['resources']['default']['mem_mb'],
+        runtime_s = config['resources']['default']['runtime_s']
