@@ -22,7 +22,7 @@ rule process:
     shell:
         'radsex process '
         '--threads {threads} '
-        '--input-dir {input} '
+        '--input-dir {params.samples_dir} '
         '--output-file {output} '
         '--min-depth {params.min_depth} '
         '2> {log}'
