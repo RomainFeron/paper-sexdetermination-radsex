@@ -8,7 +8,11 @@ checkpoint get_dataset:
         'benchmarks/{dataset}/get_dataset.tsv'
     log:
         'logs/{dataset}/get_dataset.txt'
-    conda: '../envs/workflow.yaml'
+    conda:
+        '../envs/workflow.yaml'
+    resources:
+        mem_mb = config['resources']['default']['mem_mb'],
+        runtime_s = config['resources']['default']['runtime_s']
     params:
         bioproject = lambda wildcards: config['info'][wildcards.dataset]['bioproject'],
         ncbi_api_key = config['ncbi']['api_key'],
@@ -22,7 +26,7 @@ def download_dataset_input(wildcards):
     '''
     '''
     checkpoints.get_dataset.get(dataset=wildcards.dataset)
-    reads_file = os.path.join(rules.download_dataset.output[0], '{sample}.fq.gz')
+    reads_file = 'results/{dataset}/samples/{sample}.fq.gz'
     samples = glob_wildcards(f'results/{wildcards.dataset}/.download/{{sample}}.accession').sample
     all_samples = expand(reads_file, dataset=wildcards.dataset, sample=samples)
     return all_samples
@@ -34,11 +38,14 @@ rule download_dataset:
     input:
         download_dataset_input
     output:
-        directory('results/{dataset}/samples')
+        touch('results/{dataset}/.dl.done')
     benchmark:
         'benchmarks/{dataset}/download_dataset.tsv'
     log:
         'logs/{dataset}/download_dataset.txt'
+    resources:
+        mem_mb = config['resources']['default']['mem_mb'],
+        runtime_s = config['resources']['default']['runtime_s']
 
 
 rule download_sample:
@@ -52,6 +59,10 @@ rule download_sample:
         'benchmarks/{dataset}/download_sample/{sample}.tsv'
     log:
         'logs/{dataset}/download_sample/{sample}.txt'
-    conda: '../envs/workflow.yaml'
+    conda:
+        '../envs/workflow.yaml'
+    resources:
+        mem_mb = config['resources']['default']['mem_mb'],
+        runtime_s = config['resources']['default']['runtime_s']
     shell:
         'fastq-dump -Z --gzip $(cat {input}) > {output} 2> {log}'
