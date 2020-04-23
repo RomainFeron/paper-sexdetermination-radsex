@@ -2,9 +2,9 @@ configfile: 'config.yaml'
 
 include: 'rules/config.smk'
 init_workflow()
-
 include: 'rules/data.smk'
-include: 'rules/radsex.smk'
+include: 'rules/default_workflow.smk'
+
 
 rule all:
     input:
