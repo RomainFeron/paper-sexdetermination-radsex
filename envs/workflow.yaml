@@ -1,11 +1,11 @@
-name: busco-env
+name: radsex-workflow
 channels:
   - conda-forge
   - bioconda
 dependencies:
-  - radsex
-  - r-sgtr
-  - sra-tools
-  - requests
-  - biopython
-  - xmltodict
+  - radsex=1.0.0c
+  - r-sgtr=1.0.1
+  - sra-tools=2.10.3
+  - requests=2.23.0
+  - biopython=1.76
+  - xmltodict=0.12.0

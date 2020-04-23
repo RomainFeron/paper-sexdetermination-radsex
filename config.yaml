@@ -1,7 +1,12 @@
+# General config file for the workflow.
+
+# By default, the workflow is run for all datasets and figures.
+# Edit this file to select specific datasets to run
 info_file: data/info.tsv
 
+# radsex parameters
 params:
-    general:
+    general:  # These parameters will be used for all commands when applicable
         groups:
             group1: male
             group2: female
@@ -13,15 +18,18 @@ params:
     process:
         min-depth: 1
 
-resources:
+resources:  # Define resources, mostly used when running on an HPC
     process:
         threads: 4
         mem_mb: 20000
     general:
         mem_mb: 4000
 
+# This file contains default settings for all radsex commands.
+# You should not have to edit that in theory.
 default_settings_file: 'cfg/defaults.yaml'
 
+# Config for NCBI queries; you can add your email and you api key if you have one
 ncbi:
     api_key: 9b747e0153782a735ef80e1ded2e7618be08
     email: romain.feron.91@gmail.com
