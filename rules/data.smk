@@ -74,9 +74,9 @@ rule download_genome:
     output:
         'results/{dataset}/genome/genome.fa'
     benchmark:
-        'benchmarks/{dataset}/download_sample/{sample}.tsv'
+        'benchmarks/{dataset}/download_genome.tsv'
     log:
-        'logs/{dataset}/download_sample/{sample}.txt'
+        'logs/{dataset}/download_genome.txt'
     conda:
         '../envs/workflow.yaml'
     resources:
