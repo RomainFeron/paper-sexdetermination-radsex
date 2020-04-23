@@ -17,13 +17,17 @@ params:
             - 10
     process:
         min-depth: 1
+    signif:
+        output-fasta: true
 
 resources:  # Define resources, mostly used when running on an HPC
     process:
         threads: 4
-        mem_mb: 20000
-    general:
-        mem_mb: 4000
+        mem_mb: 20000    # 20Gb
+        runtime_s: 7200  # 2 hours
+    default:
+        mem_mb: 4000     # 4Gb
+        runtime_s: 1800  # 30 minutes
 
 # This file contains default settings for all radsex commands.
 # You should not have to edit that in theory.
