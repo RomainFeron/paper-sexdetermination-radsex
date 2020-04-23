@@ -6,8 +6,8 @@ sink(log_file, append=TRUE, type="message")
 
 # Get other info from snakemake
 input_file_path <- snakemake@input[[1]]
-sex_output_file <- snakemake@output@by_sex[[1]]
-individual_output_file <- snakemake@output@by_individual[[1]]
+sex_output_file <- snakemake@output$by_sex[[1]]
+individual_output_file <- snakemake@output$by_individual[[1]]
 
 # Prevent R from automatically creating the file "Rplots.pdf"
 pdf(NULL)
