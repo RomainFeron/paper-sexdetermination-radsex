@@ -17,7 +17,8 @@ rule process:
         mem_mb = config['resources']['process']['mem_mb'],
         runtime_s = config['resources']['process']['runtime_s']
     params:
-        min_depth = config['params']['process']['min-depth']
+        min_depth = config['params']['process']['min-depth'],
+        samples_dir = lambda wildcards: f'results/{wildcards.dataset}/samples'
     shell:
         'radsex process '
         '--threads {threads} '
