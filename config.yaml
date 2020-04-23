@@ -23,7 +23,7 @@ resources:
 default_settings_file: 'cfg/defaults.yaml'
 
 ncbi:
-    api_key:
-    email:
+    api_key: 9b747e0153782a735ef80e1ded2e7618be08
+    email: romain.feron.91@gmail.com
     max_tries: 10
     sleep_between_tries: 1
