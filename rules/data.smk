@@ -52,7 +52,7 @@ rule download_sample:
     ''''
     '''
     input:
-        os.path.join(rules.get_dataset.output.download_info, '{sample}.accession'),
+        os.path.join(rules.get_dataset.output.download_info, '{sample}.accession')
     output:
         'results/{dataset}/samples/{sample}.fq.gz'
     benchmark:
@@ -66,3 +66,23 @@ rule download_sample:
         runtime_s = config['resources']['default']['runtime_s']
     shell:
         'fastq-dump -Z --gzip $(cat {input}) > {output} 2> {log}'
+
+
+rule download_genome:
+    ''''
+    '''
+    output:
+        'results/{dataset}/genome/genome.fa'
+    benchmark:
+        'benchmarks/{dataset}/download_sample/{sample}.tsv'
+    log:
+        'logs/{dataset}/download_sample/{sample}.txt'
+    conda:
+        '../envs/workflow.yaml'
+    resources:
+        mem_mb = config['resources']['default']['mem_mb'],
+        runtime_s = config['resources']['default']['runtime_s']
+    params:
+        url = lambda wildcards: config['info'][wildcards.dataset]['genome']
+    shell:
+        'wget -O- {params.url} > {output} 2> {log}'

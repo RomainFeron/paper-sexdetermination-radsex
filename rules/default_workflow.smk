@@ -22,7 +22,7 @@ rule process:
     shell:
         'radsex process '
         '--threads {threads} '
-        '--input-dir {input} '
+        '--input-dir {params.samples_dir} '
         '--output-file {output} '
         '--min-depth {params.min_depth} '
         '2> {log}'
@@ -71,7 +71,7 @@ rule depth_plot:
         mem_mb = config['resources']['default']['mem_mb'],
         runtime_s = config['resources']['default']['runtime_s']
     script:
-        '../scripts/depth.R'
+        '../scripts/depth_plot.R'
 
 
 rule distrib:
@@ -119,7 +119,7 @@ rule distrib_plot:
         mem_mb = config['resources']['default']['mem_mb'],
         runtime_s = config['resources']['default']['runtime_s']
     script:
-        '../scripts/distrib.R'
+        '../scripts/distrib_plot.R'
 
 
 rule freq:
@@ -165,7 +165,7 @@ rule freq_plot:
         mem_mb = config['resources']['default']['mem_mb'],
         runtime_s = config['resources']['default']['runtime_s']
     script:
-        '../scripts/freq.R'
+        '../scripts/freq_plot.R'
 
 
 rule signif:
