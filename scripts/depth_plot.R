@@ -24,8 +24,10 @@ reads_plot <- sgtr::radsex_depth(input_file_path,
 # Barplot for number of reads per individual
 depth_plot <- sgtr::radsex_depth(input_file_path,
                                  groups = c("male", "female"),
-                                 by_group = FALSE,
+                                 type = "barplot",
                                  group_colors = c("dodgerblue3", "red2"),
                                  metric = "Reads",
                                  ylab = "Number of reads",
+                                 width = 16,
+                                 height =10,
                                  output_file = individual_output_file)
