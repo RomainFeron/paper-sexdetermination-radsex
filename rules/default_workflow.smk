@@ -1,3 +1,8 @@
+# Constrain value of min_depth to a number
+wildcard_constraints:
+    min_depth = '\d+'
+
+
 rule process:
     '''
     '''

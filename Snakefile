@@ -17,12 +17,14 @@ def all_input(wildcards):
                               dataset=config['info'].keys())
     medaka = [*rules.medaka_subset_plot.output, *rules.medaka_map_plot.output,
               *rules.medaka_distrib_plot.output, *rules.medaka_update_signif.output]
+    medaka = [*rules.medaka_subset_plot.output, *rules.medaka_map_plot.output,
+              *rules.medaka_distrib_plot.output, *rules.medaka_update_signif.output]
     cod = [*rules.gadus_morhua_subset_plot.output, *rules.gadus_morhua_map_plot.output]
     figures = [*rules.figure_3.output, *rules.figure_4.output,
                *rules.figure_5.output, *rules.figure_6.output,
                *rules.supp_figure_2.output, *rules.supp_figure_3.output]
     tables = [*rules.supp_table_4.output, *rules.supp_table_6.output]
-    all_input = default_workflow + figures + tables
+    all_input = default_workflow + figures + tables + medaka + cod
     return all_input
 
 
