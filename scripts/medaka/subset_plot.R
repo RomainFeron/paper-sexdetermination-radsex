@@ -13,7 +13,7 @@ output_file_path <- snakemake@output[[1]]
 pdf(NULL)
 
 # Clustered heatmap of depth of each marker in each individual
-p <- sgtr:: radsex_marker_depths(input_file,
+p <- sgtr:: radsex_marker_depths(subset_file_path,
                                  output_file = output_file_path,
                                  group_info_file = popmap_file_path,
                                  group_labels = c("Males", "Females"),

@@ -21,23 +21,23 @@ svg_output_file <- snakemake@output$svg[[1]]
 pdf(NULL)
 
 # Generate distrib plot
-distrib <- sgtr::radsex_distrib(input_file_path,
+distrib <- sgtr::radsex_distrib(distrib_file_path,
                                 groups = c("male", "female"),
                                 group_labels = c("Males", "Females"))
 
 # Generate clustering plot
-clutering <- sgtr:: radsex_marker_depths(input_file,
-                                         group_info_file = popmap_file_path,
-                                         group_labels = c("Males", "Females"),
-                                         label_colors = c("dodgerblue3", "red3"),
-                                         clustering_method = 'ward.D2',
-                                         distance_method = 'binary')
+clustering <- sgtr:: radsex_marker_depths(subset_file_path,
+                                          group_info_file = popmap_file_path,
+                                          group_labels = c("Males", "Females"),
+                                          label_colors = c("dodgerblue3", "red3"),
+                                          clustering_method = 'ward.D2',
+                                          distance_method = 'binary')
 
 # Generate manhattan plot
-manhattan <- sgtr:: radsex_map_manhattan(input_file)
+manhattan <- sgtr:: radsex_map_manhattan(map_file_path)
 
 # Generate alignment metrics plot for LG1
-lg1 <- sgtr:: radsex_map_region(input_file,
+lg1 <- sgtr:: radsex_map_region(map_file_path,
                                 region = "1")
 
 # Combine legend from distrib and clustering plots
