@@ -212,7 +212,7 @@ rule default_workflow:
     input:
         default_workflow_input
     output:
-        'results/radsex/{dataset}/.done'
+        touch('results/radsex/{dataset}/.done')
     benchmark:
         'benchmarks/{dataset}/default_workflow.tsv'
     log:
