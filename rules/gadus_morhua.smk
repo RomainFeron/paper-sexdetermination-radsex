@@ -52,7 +52,7 @@ rule gadus_morhua_map:
     '''
     input:
         markers_table = 'results/gadus_morhua/markers_table.tsv',
-        popmap = rules.gadus_morhua_update_popmap.output,
+        popmap = 'results/gadus_morhua/popmap.tsv',
         genome = 'results/gadus_morhua/genome/genome.fa'
     output:
         'results/gadus_morhua/map.tsv'

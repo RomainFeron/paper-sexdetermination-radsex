@@ -18,12 +18,12 @@ rule supp_table_6:
     '''
     '''
     input:
-        cyprinus_carpio = 'results/cyprinus_carpio/cyprinus_carpio.fa'
-        gadus_morhua = 'results/gadus_morhua/gadus_morhua.fa'
-        gymnotus_carapo = 'results/gymnotus_carapo/gymnotus_carapo.fa'
-        plecoglossus_altivelis = 'results/plecoglossus_altivelis/plecoglossus_altivelis.fa'
-        poecilia_sphenops = 'results/poecilia_sphenops/poecilia_sphenops.fa'
-        tinca_tinca = 'results/tinca_tinca/tinca_tinca.fa'
+        cyprinus_carpio = 'results/cyprinus_carpio/signif_10.fa',
+        gadus_morhua = 'results/gadus_morhua/signif_10.fa',
+        gymnotus_carapo = 'results/gymnotus_carapo/signif_10.fa',
+        plecoglossus_altivelis = 'results/plecoglossus_altivelis/signif_10.fa',
+        poecilia_sphenops = 'results/poecilia_sphenops/signif_10.fa',
+        tinca_tinca = 'results/tinca_tinca/signif_10.fa'
     output:
         'results/tables/supp_table_6.xlsx'
     benchmark:
