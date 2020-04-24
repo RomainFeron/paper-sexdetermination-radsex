@@ -44,7 +44,7 @@ rule medaka_subset_plot:
     conda:
         '../envs/workflow.yaml'
     script:
-        '../scripts/medaka_subset_plot.R'
+        '../scripts/medaka/subset_plot.R'
 
 
 rule medaka_update_popmap:
@@ -89,6 +89,7 @@ rule medaka_update_distrib:
         '--min-depth {params.min_depth} '
         '--groups {params.groups} '
         '2> {log}'
+
 
 rule medaka_distrib_plot:
     '''
@@ -179,4 +180,4 @@ rule medaka_map_plot:
     conda:
         '../envs/workflow.yaml'
     script:
-        '../scripts/medaka_map_plot.R'
+        '../scripts/medaka/map_plot.R'
