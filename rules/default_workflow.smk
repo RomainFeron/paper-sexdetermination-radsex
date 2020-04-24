@@ -199,7 +199,7 @@ def default_workflow_input(wildcards):
     '''
     '''
     all_input_files = rules.distrib.output + rules.signif.output + rules.depth.output
-    all_input_files += rules.depth_plot.output + rules.distrib_plot.output + rules.freq_plot.output
+    all_input_files += rules.depth_plot.output + rules.distrib_plot.output
     output = expand(all_input_files,
                     dataset=wildcards.dataset,
                     min_depth=config['params']['general']['min_depth']),
