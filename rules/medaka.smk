@@ -61,7 +61,7 @@ rule medaka_update_popmap:
     conda:
         '../envs/workflow.yaml'
     shell:
-        ''
+        'echo placeholder'
 
 
 rule medaka_update_distrib:

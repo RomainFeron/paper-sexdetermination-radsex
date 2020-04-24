@@ -63,15 +63,49 @@ rule figure_6:
     '''
     '''
     input:
-        clustering =
+        subset = rules.gadus_morhua_subset.output,
+        map = rules.gadus_morhua_map.output,
+        popmap = 'results/gadus_morhua/popmap.tsv'
     output:
-        png = 'results/figures/figure_5.png',
-        svg = 'results/figures/figure_5.svg'
+        png = 'results/figures/figure_6.png',
+        svg = 'results/figures/figure_6.svg'
     benchmark:
-        'benchmarks/figures/figure_5.tsv'
+        'benchmarks/figures/figure_6.tsv'
     log:
-        'logs/figures/figure_5.txt'
+        'logs/figures/figure_6.txt'
     conda:
         '../envs/workflow.yaml'
     script:
-        '../scripts/figures/figure_5.R'
+        '../scripts/figures/figure_6.R'
+
+
+rule supp_figure_2:
+    '''
+    '''
+    output:
+        png = 'results/figures/supp_figure_2.png',
+        svg = 'results/figures/supp_figure_2.svg'
+    benchmark:
+        'benchmarks/figures/supp_figure_2.tsv'
+    log:
+        'logs/figures/supp_figure_2.txt'
+    conda:
+        '../envs/workflow.yaml'
+    script:
+        '../scripts/figures/supp_figure_2.R'
+
+
+rule supp_figure_3:
+    '''
+    '''
+    output:
+        png = 'results/figures/supp_figure_3.png',
+        svg = 'results/figures/supp_figure_3.svg'
+    benchmark:
+        'benchmarks/figures/supp_figure_3.tsv'
+    log:
+        'logs/figures/supp_figure_3.txt'
+    conda:
+        '../envs/workflow.yaml'
+    script:
+        '../scripts/figures/supp_figure_3.R'
