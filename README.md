@@ -1,6 +1,6 @@
 # RADSex paper analyses workflow
 
-Complete workflow to perform analyses and generate figures from the RADSex paper (link / doi).
+Complete workflow to perform analyses and generate figures from the RADSex paper (https://www.biorxiv.org/content/10.1101/2020.04.22.054866v1).
 
 ## Installing the workflow
 
@@ -36,7 +36,7 @@ snakemake -j8 --use-conda
 
 ## Quick workflow description
 
-This workflow implements all the analyses presented in the RADSex paper and generates figures for each analyses as well as most figures included in the paper. Data is pulled from the NCBI SRA repository and all parameters are defined in `config.yaml`.
+This workflow implements all the analyses presented in the RADSex paper and generates figures for each analyses as well as most figures included in the paper. Data is defined in `data/info.tsv`; reads are downloaded from the NCBI SRA repository and genomes are downloaded from provided links. All parameters are defined in `config.yaml`.
 
 Briefly, this workflow performs the following steps:
 
@@ -45,4 +45,4 @@ Briefly, this workflow performs the following steps:
 - Run `distrib`, `signif`, `freq`, and `depth` on each dataset with a minimum depth (`--min-depth`) of 1, 2, 5, and 10.
 - Generate standard plots from the results of these analyses.
 - Run `map` and `subset` for datasets where it's possible / required.
-- Generate the final figures and tables from the paper.
+- Generate all figures and tables that can be automatically generated.
