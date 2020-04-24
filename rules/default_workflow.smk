@@ -4,7 +4,7 @@ rule process:
     input:
         rules.download_dataset.output
     output:
-        'results/{dataset}/markers_table.tsv'
+        'results/radsex/{dataset}/markers_table.tsv'
     benchmark:
         'benchmarks/{dataset}/process.tsv'
     log:
@@ -17,7 +17,7 @@ rule process:
         mem_mb = config['resources']['process']['mem_mb'],
         runtime_s = config['resources']['process']['runtime_s']
     params:
-        samples_dir = lambda wildcards: f'results/{wildcards.dataset}/samples'
+        samples_dir = lambda wildcards: f'results/radsex/{wildcards.dataset}/samples'
     shell:
         'radsex process '
         '--threads {threads} '
@@ -32,9 +32,9 @@ rule depth:
     '''
     input:
         markers_table = rules.process.output,
-        popmap = 'results/{dataset}/popmap.tsv'
+        popmap = 'results/radsex/{dataset}/popmap.tsv'
     output:
-        'results/{dataset}/depth.tsv'
+        'results/radsex/{dataset}/depth.tsv'
     benchmark:
         'benchmarks/{dataset}/depth.tsv'
     log:
@@ -58,8 +58,8 @@ rule depth_plot:
     input:
         rules.depth.output
     output:
-        by_individual = 'results/{dataset}/depth_by_individual.png',
-        by_sex = 'results/{dataset}/depth_by_sex.png'
+        by_individual = 'results/radsex/{dataset}/depth_by_individual.png',
+        by_sex = 'results/radsex/{dataset}/depth_by_sex.png'
     benchmark:
         'benchmarks/{dataset}/depth_plot.tsv'
     log:
@@ -78,9 +78,9 @@ rule distrib:
     '''
     input:
         markers_table = rules.process.output,
-        popmap = 'results/{dataset}/popmap.tsv'
+        popmap = 'results/radsex/{dataset}/popmap.tsv'
     output:
-        'results/{dataset}/distrib_{min_depth}.tsv'
+        'results/radsex/{dataset}/distrib_{min_depth}.tsv'
     benchmark:
         'benchmarks/{dataset}/distrib_{min_depth}.tsv'
     log:
@@ -107,7 +107,7 @@ rule distrib_plot:
     input:
         rules.distrib.output
     output:
-        'results/{dataset}/distrib_{min_depth}.png',
+        'results/radsex/{dataset}/distrib_{min_depth}.png',
     benchmark:
         'benchmarks/{dataset}/distrib_{min_depth}_plot.tsv'
     log:
@@ -127,7 +127,7 @@ rule freq:
     input:
         markers_table = rules.process.output
     output:
-        'results/{dataset}/freq_{min_depth}.tsv'
+        'results/radsex/{dataset}/freq_{min_depth}.tsv'
     benchmark:
         'benchmarks/{dataset}/freq_{min_depth}.tsv'
     log:
@@ -153,7 +153,7 @@ rule freq_plot:
     input:
         rules.freq.output
     output:
-        'results/{dataset}/freq_{min_depth}.png',
+        'results/radsex/{dataset}/freq_{min_depth}.png',
     benchmark:
         'benchmarks/{dataset}/freq_{min_depth}_plot.tsv'
     log:
@@ -172,9 +172,9 @@ rule signif:
     '''
     input:
         markers_table = rules.process.output,
-        popmap = 'results/{dataset}/popmap.tsv'
+        popmap = 'results/radsex/{dataset}/popmap.tsv'
     output:
-        'results/{dataset}/signif_{min_depth}.fa'
+        'results/radsex/{dataset}/signif_{min_depth}.fa'
     benchmark:
         'benchmarks/{dataset}/signif_{min_depth}.tsv'
     log:
@@ -212,7 +212,7 @@ rule default_workflow:
     input:
         default_workflow_input
     output:
-        'results/{dataset}/.done'
+        'results/radsex/{dataset}/.done'
     benchmark:
         'benchmarks/{dataset}/default_workflow.tsv'
     log:
