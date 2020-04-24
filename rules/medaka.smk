@@ -107,6 +107,34 @@ rule medaka_distrib_plot:
         '../scripts/distrib_plot.R'
 
 
+rule medaka_update_signif:
+    '''
+    '''
+    input:
+        markers_table = 'results/oryzias_latipes/markers_table.tsv',
+        popmap = rules.medaka_update_popmap.output
+    output:
+        'results/oryzias_latipes/signif_10_updated.tsv'
+    benchmark:
+        'benchmarks/oryzias_latipes/medaka_update_signif.tsv'
+    log:
+        'logs/oryzias_latipes/medaka_update_signif.txt'
+    conda:
+        '../envs/workflow.yaml'
+    params:
+        min_depth = 10,
+        groups = 'male,female'
+    shell:
+        'radsex signif '
+        '--markers-table {input.markers_table} '
+        '--popmap {input.popmap} '
+        '--output-file {output} '
+        '--min-depth {params.min_depth} '
+        '--groups {params.groups} '
+        '--output-fasta '
+        '2> {log}'
+
+
 rule medaka_map:
     '''
     '''
