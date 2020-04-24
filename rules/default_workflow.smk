@@ -175,7 +175,7 @@ rule signif:
         markers_table = rules.process.output,
         popmap = 'results/{dataset}/popmap.tsv'
     output:
-        'results/{dataset}/signif_{min_depth}.tsv'
+        'results/{dataset}/signif_{min_depth}.fa'
     benchmark:
         'benchmarks/{dataset}/signif_{min_depth}.tsv'
     log:
@@ -199,7 +199,7 @@ rule signif:
 def default_workflow_input(wildcards):
     '''
     '''
-    all_input_files = rules.distrib.output + rules.freq.output + rules.signif.output + rules.depth.output
+    all_input_files = rules.distrib.output + rules.signif.output + rules.depth.output
     all_input_files += rules.depth_plot.output + rules.distrib_plot.output + rules.freq_plot.output
     output = expand(all_input_files,
                     dataset=wildcards.dataset,
