@@ -1,3 +1,8 @@
+# Constrain value of min_depth to a number
+wildcard_constraints:
+    min_depth = '\d+'
+
+
 rule process:
     '''
     '''
@@ -212,7 +217,7 @@ rule default_workflow:
     input:
         default_workflow_input
     output:
-        'results/radsex/{dataset}/.done'
+        touch('results/radsex/{dataset}/.done')
     benchmark:
         'benchmarks/{dataset}/default_workflow.tsv'
     log:
