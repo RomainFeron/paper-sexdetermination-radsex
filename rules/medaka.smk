@@ -158,7 +158,7 @@ rule medaka_map:
         'radsex map '
         '--markers-file {input.markers_table} '
         '--popmap {input.popmap} '
-        '--genome-file {input.genome}'
+        '--genome-file {input.genome} '
         '--output-file {output} '
         '--min-depth {params.min_depth} '
         '--groups {params.groups} '
