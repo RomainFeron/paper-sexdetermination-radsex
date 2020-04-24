@@ -19,10 +19,10 @@ rule figure_4:
     '''
     '''
     input:
-        distrib = 'results/oryzias_latipes/distrib_10.tsv',
+        distrib = 'results/radsex/oryzias_latipes/distrib_10.tsv',
         subset = rules.medaka_subset.output,
         map = rules.medaka_map.output,
-        popmap = 'results/oryzias_latipes/popmap.tsv'
+        popmap = 'results/radsex/oryzias_latipes/popmap.tsv'
     output:
         png = 'results/figures/figure_4.png',
         svg = 'results/figures/figure_4.svg'
@@ -40,12 +40,12 @@ rule figure_5:
     '''
     '''
     input:
-        cyprinus_carpio = 'results/cyprinus_carpio/distrib_10.tsv',
-        gadus_morhua = 'results/gadus_morhua/distrib_10.tsv',
-        gymnotus_carapo = 'results/gymnotus_carapo/distrib_10.tsv',
-        plecoglossus_altivelis = 'results/plecoglossus_altivelis/distrib_10.tsv',
-        poecilia_sphenops = 'results/poecilia_sphenops/distrib_10.tsv',
-        tinca_tinca = 'results/tinca_tinca/distrib_10.tsv'
+        cyprinus_carpio = 'results/radsex/cyprinus_carpio/distrib_10.tsv',
+        gadus_morhua = 'results/radsex/gadus_morhua/distrib_10.tsv',
+        gymnotus_carapo = 'results/radsex/gymnotus_carapo/distrib_10.tsv',
+        plecoglossus_altivelis = 'results/radsex/plecoglossus_altivelis/distrib_10.tsv',
+        poecilia_sphenops = 'results/radsex/poecilia_sphenops/distrib_10.tsv',
+        tinca_tinca = 'results/radsex/tinca_tinca/distrib_10.tsv'
     output:
         png = 'results/figures/figure_5.png',
         svg = 'results/figures/figure_5.svg'
@@ -65,7 +65,7 @@ rule figure_6:
     input:
         subset = rules.gadus_morhua_subset.output,
         map = rules.gadus_morhua_map.output,
-        popmap = 'results/gadus_morhua/popmap.tsv'
+        popmap = 'results/radsex/gadus_morhua/popmap.tsv'
     output:
         png = 'results/figures/figure_6.png',
         svg = 'results/figures/figure_6.svg'

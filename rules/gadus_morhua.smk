@@ -2,10 +2,10 @@ rule gadus_morhua_subset:
     '''
     '''
     input:
-        markers_table = 'results/gadus_morhua/markers_table.tsv',
-        popmap = 'results/gadus_morhua/popmap.tsv'
+        markers_table = 'results/radsex/gadus_morhua/markers_table.tsv',
+        popmap = 'results/radsex/gadus_morhua/popmap.tsv'
     output:
-        'results/gadus_morhua/subset_male_markers.tsv'
+        'results/radsex/gadus_morhua/subset_male_markers.tsv'
     benchmark:
         'benchmarks/gadus_morhua/gadus_morhua_subset.tsv'
     log:
@@ -34,9 +34,9 @@ rule gadus_morhua_subset_plot:
     '''
     input:
         subset = rules.gadus_morhua_subset.output,
-        popmap = 'results/gadus_morhua/popmap.tsv'
+        popmap = 'results/radsex/gadus_morhua/popmap.tsv'
     output:
-        'results/gadus_morhua/markers_clustering.png'
+        'results/radsex/gadus_morhua/markers_clustering.png'
     benchmark:
         'benchmarks/gadus_morhua/gadus_morhua_subset_plot.tsv'
     log:
@@ -51,11 +51,11 @@ rule gadus_morhua_map:
     '''
     '''
     input:
-        markers_table = 'results/gadus_morhua/markers_table.tsv',
-        popmap = 'results/gadus_morhua/popmap.tsv',
-        genome = 'results/gadus_morhua/genome/genome.fa'
+        markers_table = 'results/radsex/gadus_morhua/markers_table.tsv',
+        popmap = 'results/radsex/gadus_morhua/popmap.tsv',
+        genome = 'results/radsex/gadus_morhua/genome/genome.fa'
     output:
-        'results/gadus_morhua/map.tsv'
+        'results/radsex/gadus_morhua/map.tsv'
     benchmark:
         'benchmarks/gadus_morhua/gadus_morhua_map.tsv'
     log:
@@ -82,8 +82,8 @@ rule gadus_morhua_map_plot:
     input:
         rules.gadus_morhua_map.output
     output:
-        circos = 'results/gadus_morhua/map_circos.png',
-        manhattan = 'results/gadus_morhua/map_manhattan.png'
+        circos = 'results/radsex/gadus_morhua/map_circos.png',
+        manhattan = 'results/radsex/gadus_morhua/map_manhattan.png'
     benchmark:
         'benchmarks/gadus_morhua/gadus_morhua_map_plot.tsv'
     log:

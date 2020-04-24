@@ -2,8 +2,8 @@ checkpoint get_dataset:
     '''
     '''
     output:
-        popmap = 'results/{dataset}/popmap.tsv',
-        download_info = directory('results/{dataset}/.download')
+        popmap = 'results/radsex/{dataset}/popmap.tsv',
+        download_info = directory('results/radsex/{dataset}/.download')
     benchmark:
         'benchmarks/{dataset}/get_dataset.tsv'
     log:
@@ -26,7 +26,7 @@ def download_dataset_input(wildcards):
     '''
     '''
     checkpoints.get_dataset.get(dataset=wildcards.dataset)
-    reads_file = 'results/{dataset}/samples/{sample}.fq.gz'
+    reads_file = 'results/radsex/{dataset}/samples/{sample}.fq.gz'
     samples = glob_wildcards(f'results/{wildcards.dataset}/.download/{{sample}}.accession').sample
     all_samples = expand(reads_file, dataset=wildcards.dataset, sample=samples)
     return all_samples
@@ -38,7 +38,7 @@ rule download_dataset:
     input:
         download_dataset_input
     output:
-        touch('results/{dataset}/.dl.done')
+        touch('results/radsex/{dataset}/.dl.done')
     benchmark:
         'benchmarks/{dataset}/download_dataset.tsv'
     log:
@@ -54,7 +54,7 @@ rule download_sample:
     input:
         os.path.join(rules.get_dataset.output.download_info, '{sample}.accession')
     output:
-        'results/{dataset}/samples/{sample}.fq.gz'
+        'results/radsex/{dataset}/samples/{sample}.fq.gz'
     benchmark:
         'benchmarks/{dataset}/download_sample/{sample}.tsv'
     log:
@@ -72,7 +72,7 @@ rule download_genome:
     ''''
     '''
     output:
-        'results/{dataset}/genome/genome.fa'
+        'results/radsex/{dataset}/genome/genome.fa'
     benchmark:
         'benchmarks/{dataset}/download_genome.tsv'
     log:

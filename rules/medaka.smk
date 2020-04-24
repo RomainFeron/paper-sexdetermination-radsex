@@ -2,10 +2,10 @@ rule medaka_subset:
     '''
     '''
     input:
-        markers_table = 'results/oryzias_latipes/markers_table.tsv',
-        popmap = 'results/oryzias_latipes/popmap.tsv'
+        markers_table = 'results/radsex/oryzias_latipes/markers_table.tsv',
+        popmap = 'results/radsex/oryzias_latipes/popmap.tsv'
     output:
-        'results/oryzias_latipes/subset_male_markers.tsv'
+        'results/radsex/oryzias_latipes/subset_male_markers.tsv'
     benchmark:
         'benchmarks/oryzias_latipes/medaka_subset.tsv'
     log:
@@ -34,9 +34,9 @@ rule medaka_subset_plot:
     '''
     input:
         subset = rules.medaka_subset.output,
-        popmap = 'results/oryzias_latipes/popmap.tsv'
+        popmap = 'results/radsex/oryzias_latipes/popmap.tsv'
     output:
-        'results/oryzias_latipes/markers_clustering.png'
+        'results/radsex/oryzias_latipes/markers_clustering.png'
     benchmark:
         'benchmarks/oryzias_latipes/medaka_subset_plot.tsv'
     log:
@@ -51,9 +51,9 @@ rule medaka_update_popmap:
     '''
     '''
     input:
-        'results/oryzias_latipes/popmap.tsv'
+        'results/radsex/oryzias_latipes/popmap.tsv'
     output:
-        'results/oryzias_latipes/popmap_updated.tsv'
+        'results/radsex/oryzias_latipes/popmap_updated.tsv'
     benchmark:
         'benchmarks/oryzias_latipes/medaka_update_popmap.tsv'
     log:
@@ -68,10 +68,10 @@ rule medaka_update_distrib:
     '''
     '''
     input:
-        markers_table = 'results/oryzias_latipes/markers_table.tsv',
+        markers_table = 'results/radsex/oryzias_latipes/markers_table.tsv',
         popmap = rules.medaka_update_popmap.output
     output:
-        'results/oryzias_latipes/distrib_10_updated.tsv'
+        'results/radsex/oryzias_latipes/distrib_10_updated.tsv'
     benchmark:
         'benchmarks/oryzias_latipes/medaka_update_distrib.tsv'
     log:
@@ -97,7 +97,7 @@ rule medaka_distrib_plot:
     input:
         rules.medaka_update_distrib.output
     output:
-        'results/oryzias_latipes/distrib_10_updated.png'
+        'results/radsex/oryzias_latipes/distrib_10_updated.png'
     benchmark:
         'benchmarks/oryzias_latipes/medaka_distrib_plot.tsv'
     log:
@@ -112,10 +112,10 @@ rule medaka_update_signif:
     '''
     '''
     input:
-        markers_table = 'results/oryzias_latipes/markers_table.tsv',
+        markers_table = 'results/radsex/oryzias_latipes/markers_table.tsv',
         popmap = rules.medaka_update_popmap.output
     output:
-        'results/oryzias_latipes/signif_10_updated.tsv'
+        'results/radsex/oryzias_latipes/signif_10_updated.tsv'
     benchmark:
         'benchmarks/oryzias_latipes/medaka_update_signif.tsv'
     log:
@@ -140,11 +140,11 @@ rule medaka_map:
     '''
     '''
     input:
-        markers_table = 'results/oryzias_latipes/markers_table.tsv',
+        markers_table = 'results/radsex/oryzias_latipes/markers_table.tsv',
         popmap = rules.medaka_update_popmap.output,
-        genome = 'results/oryzias_latipes/genome/genome.fa'
+        genome = 'results/radsex/oryzias_latipes/genome/genome.fa'
     output:
-        'results/oryzias_latipes/map.tsv'
+        'results/radsex/oryzias_latipes/map.tsv'
     benchmark:
         'benchmarks/oryzias_latipes/medaka_map.tsv'
     log:
@@ -171,8 +171,8 @@ rule medaka_map_plot:
     input:
         rules.medaka_map.output
     output:
-        circos = 'results/oryzias_latipes/map_circos.png',
-        manhattan = 'results/oryzias_latipes/map_manhattan.png'
+        circos = 'results/radsex/oryzias_latipes/map_circos.png',
+        manhattan = 'results/radsex/oryzias_latipes/map_manhattan.png'
     benchmark:
         'benchmarks/oryzias_latipes/medaka_map_plot.tsv'
     log:
