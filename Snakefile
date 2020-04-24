@@ -20,8 +20,6 @@ def all_input(wildcards):
                *rules.supp_figure_2.output, *rules.supp_figure_3.output]
     tables = [*rules.supp_table_4.output, *rules.supp_table_6.output]
     all_input = default_workflow + figures + tables
-
-    print(all_input)
     return all_input
 
 
