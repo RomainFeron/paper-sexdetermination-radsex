@@ -2,6 +2,8 @@
 
 Complete workflow to perform analyses and generate figures from the RADSex paper (https://www.biorxiv.org/content/10.1101/2020.04.22.054866v1).
 
+The workflow is still under development and not functional yet.
+
 ## Installing the workflow
 
 The workflow requires Snakemake (>= 5.8) and makes use of Conda to handle software dependencies. If you do not have Snakemake and Conda setup, you can follow my quick setup guide available [here](https://gist.github.com/RomainFeron/da9df092656dd799885b612fedc9eccd).
