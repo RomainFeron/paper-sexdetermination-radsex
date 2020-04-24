@@ -15,6 +15,9 @@ def all_input(wildcards):
     '''
     default_workflow = expand(rules.default_workflow.output,
                               dataset=config['info'].keys())
+    medaka = [*rules.medaka_subset_plot.output, *rules.medaka_map_plot.output,
+              *rules.medaka_distrib_plot.output, *rules.medaka_update_signif.output]
+    cod = [*rules.gadus_morhua_subset_plot.output, *rules.gadus_morhua_map_plot.output]
     figures = [*rules.figure_3.output, *rules.figure_4.output,
                *rules.figure_5.output, *rules.figure_6.output,
                *rules.supp_figure_2.output, *rules.supp_figure_3.output]
