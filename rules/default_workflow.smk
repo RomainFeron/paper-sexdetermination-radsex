@@ -23,7 +23,7 @@ rule process:
         '--threads {threads} '
         '--input-dir {params.samples_dir} '
         '--output-file {output} '
-        '--min-depth 1'
+        '--min-depth 1 '
         '2> {log}'
 
 
