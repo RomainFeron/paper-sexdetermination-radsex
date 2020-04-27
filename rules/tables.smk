@@ -1,6 +1,8 @@
 
 rule supp_table_4:
     '''
+    Generate supplementary table 4 from the radsex paper, i.e. runtime and
+    peak memory usage on each dataset for radsex and stacks.
     '''
     output:
         'results/tables/supp_table_4.tsv'
@@ -16,6 +18,8 @@ rule supp_table_4:
 
 rule supp_table_6:
     '''
+    Generate supplementary table 6 from the radsex paper, i.e. an excel file
+    containing all markers significantly associated with sex for all datasets.
     '''
     input:
         cyprinus_carpio = 'results/radsex/cyprinus_carpio/signif_10.fa',

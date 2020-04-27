@@ -1,5 +1,11 @@
 checkpoint get_dataset:
     '''
+    Query NCBI to retrieve information on a dataset. Two outputs:
+    - popmap: groups info file with sample name and its group (i.e. sex)
+    - download_info: file with the SRA accession number used to download the
+    reads with sra toolkit.
+    Bioproject for a dataset is obtained from the parsing of the
+    'data/info.tsv' file.
     '''
     output:
         popmap = 'results/radsex/{dataset}/popmap.tsv',
@@ -24,6 +30,7 @@ checkpoint get_dataset:
 
 def download_dataset_input(wildcards):
     '''
+    Generate a list of read files for all samples in a dataset.
     '''
     checkpoints.get_dataset.get(dataset=wildcards.dataset)
     reads_file = 'results/radsex/{dataset}/samples/{sample}.fq.gz'
@@ -33,7 +40,8 @@ def download_dataset_input(wildcards):
 
 
 rule download_dataset:
-    ''''
+    '''
+    Download reads from NCBI for all samples in a dataset.
     '''
     input:
         download_dataset_input
@@ -49,7 +57,8 @@ rule download_dataset:
 
 
 rule download_sample:
-    ''''
+    '''
+    Download reads from NCBI for a single sample.
     '''
     input:
         os.path.join(rules.get_dataset.output.download_info, '{sample}.accession')
@@ -69,7 +78,8 @@ rule download_sample:
 
 
 rule download_genome:
-    ''''
+    '''
+    Download a genome file from the path give in 'data/info.tsv'.
     '''
     output:
         'results/radsex/{dataset}/genome/genome.fa'

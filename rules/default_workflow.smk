@@ -5,6 +5,7 @@ wildcard_constraints:
 
 rule process:
     '''
+    Compute a table of individual marker depths.
     '''
     input:
         rules.download_dataset.output
@@ -34,6 +35,8 @@ rule process:
 
 rule depth:
     '''
+    Compute the number of reads, number of markers, and min, max, median, and
+    average marker depth in each individual.
     '''
     input:
         markers_table = rules.process.output,
@@ -59,6 +62,9 @@ rule depth:
 
 rule depth_plot:
     '''
+    Plot the results of radsex depth; two outputs:
+    - Boxplot of distribution of number of reads in each group
+    - Barplot with number of reads per individual
     '''
     input:
         rules.depth.output
@@ -80,6 +86,7 @@ rule depth_plot:
 
 rule distrib:
     '''
+    Compute the distribution of markers between two groups.
     '''
     input:
         markers_table = rules.process.output,
@@ -108,6 +115,7 @@ rule distrib:
 
 rule distrib_plot:
     '''
+    Plot the results of radsex distrib in a tile plot.
     '''
     input:
         rules.distrib.output
@@ -128,6 +136,7 @@ rule distrib_plot:
 
 rule freq:
     '''
+    Compute the distribution of markers in the entire population.
     '''
     input:
         markers_table = rules.process.output
@@ -154,6 +163,7 @@ rule freq:
 
 rule freq_plot:
     '''
+    Plot the results of radsex freq in a distribution plot.
     '''
     input:
         rules.freq.output
@@ -174,6 +184,7 @@ rule freq_plot:
 
 rule signif:
     '''
+    Extract markers significantly associated with groups in a fasta file.
     '''
     input:
         markers_table = rules.process.output,
@@ -202,9 +213,10 @@ rule signif:
 
 def default_workflow_input(wildcards):
     '''
+    Generate a list of all default workflow output for a single dataset.
     '''
-    all_input_files = rules.distrib.output + rules.signif.output + rules.depth.output
-    all_input_files += rules.depth_plot.output + rules.distrib_plot.output
+    all_input_files = rules.distrib.output + rules.freq.output + rules.signif.output + rules.depth.output
+    all_input_files += rules.depth_plot.output + rules.freq_plot.output + rules.distrib_plot.output
     output = expand(all_input_files,
                     dataset=wildcards.dataset,
                     min_depth=config['params']['general']['min_depth']),
@@ -213,6 +225,7 @@ def default_workflow_input(wildcards):
 
 rule default_workflow:
     '''
+    Aggregator rule to run the default workflow on a single dataset.
     '''
     input:
         default_workflow_input

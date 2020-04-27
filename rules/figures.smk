@@ -1,6 +1,8 @@
 
 rule figure_3:
     '''
+    Generate figure 3 from the radsex paper, i.e. performance comparison
+    between stacks and radsex.
     '''
     output:
         png = 'results/figures/figure_3.png',
@@ -17,6 +19,8 @@ rule figure_3:
 
 rule figure_4:
     '''
+    Generate figure 4 from the radsex paper, i.e. results of the reanalysis
+    of the Oryzias latipes dataset.
     '''
     input:
         distrib = 'results/radsex/oryzias_latipes/distrib_10.tsv',
@@ -38,6 +42,8 @@ rule figure_4:
 
 rule figure_5:
     '''
+    Generate figure 5 from the radsex paper, i.e. radsex distrib tile plots
+    for all datasets with markers significantly associated with sex.
     '''
     input:
         cyprinus_carpio = 'results/radsex/cyprinus_carpio/distrib_10.tsv',
@@ -61,6 +67,8 @@ rule figure_5:
 
 rule figure_6:
     '''
+    Generate figure 6 from the radsex paper, i.e. results of the analysis
+    of the Gadus morhua dataset.
     '''
     input:
         subset = rules.gadus_morhua_subset.output,
@@ -81,6 +89,8 @@ rule figure_6:
 
 rule supp_figure_2:
     '''
+    Generate figure 5 from the radsex paper, i.e. median marker depth in an
+    individual for each analyzed dataset.
     '''
     output:
         png = 'results/figures/supp_figure_2.png',
@@ -97,6 +107,8 @@ rule supp_figure_2:
 
 rule supp_figure_3:
     '''
+    Generate figure 5 from the radsex paper, i.e. radsex distrib tile plots
+    for all datasets without markers significantly associated with sex.
     '''
     output:
         png = 'results/figures/supp_figure_3.png',
