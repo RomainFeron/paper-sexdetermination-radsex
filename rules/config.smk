@@ -1,11 +1,14 @@
 import yaml
 from collections import defaultdict
 
+# List of radsex commands
 COMMANDS = ['depth', 'distrib', 'freq', 'map', 'process', 'signif', 'subset']
 
 
 def get_dataset_info():
     '''
+    Parse the file given by the field 'info_file' in the config file to get
+    bioproject and genome file URL for each dataset.
     '''
     info_file = open(config['info_file'])
     header = info_file.readline().rstrip('\n').split('\t')
@@ -19,6 +22,10 @@ def get_dataset_info():
 
 def populate_command_config(command):
     '''
+    Initialize settings for a radsex command in the config dictionary.
+    First look for setting value in the field 'params:<command>', then in the field
+    'params:<general>' from the config file, then in the default settings file
+    defined in the field 'default_settings_file' from the config file.
     '''
     with open(config['default_settings_file']) as settings_file:
         defaults = yaml.safe_load(settings_file)
@@ -33,6 +40,8 @@ def populate_command_config(command):
 
 def get_options(command, wildcards):
     '''
+    Get value for all settings for a radsex command. Setting values were
+    initialized in the populate_command_config() function.
     '''
     options = []
     for option, value in config['commands'][command].items():
@@ -52,6 +61,8 @@ def get_options(command, wildcards):
 
 def init_workflow():
     '''
+    Run functions to get information on the datasets and initialize settings
+    for radsex commands.
     '''
     get_dataset_info()
     config['commands'] = defaultdict(dict)

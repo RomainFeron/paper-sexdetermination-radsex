@@ -1,5 +1,6 @@
 rule gadus_morhua_subset:
     '''
+    Extract male-biased markers for clustering.
     '''
     input:
         markers_table = 'results/radsex/gadus_morhua/markers_table.tsv',
@@ -31,6 +32,7 @@ rule gadus_morhua_subset:
 
 rule gadus_morhua_subset_plot:
     '''
+    Cluster male-biased markers and display results in a depth heatmap.
     '''
     input:
         subset = rules.gadus_morhua_subset.output,
@@ -49,6 +51,7 @@ rule gadus_morhua_subset_plot:
 
 rule gadus_morhua_map:
     '''
+    Align markers to the genome of Gadus morhua.
     '''
     input:
         markers_table = 'results/radsex/gadus_morhua/markers_table.tsv',
@@ -78,6 +81,8 @@ rule gadus_morhua_map:
 
 rule gadus_morhua_map_plot:
     '''
+    Generate circos and manhattan plots from the results of radsex map for
+    Gadus morhua.
     '''
     input:
         rules.gadus_morhua_map.output

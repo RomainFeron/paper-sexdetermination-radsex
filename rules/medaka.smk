@@ -1,5 +1,6 @@
 rule medaka_subset:
     '''
+    Extract male-biased markers for clustering.
     '''
     input:
         markers_table = 'results/radsex/oryzias_latipes/markers_table.tsv',
@@ -31,6 +32,8 @@ rule medaka_subset:
 
 rule medaka_subset_plot:
     '''
+    Cluster male-biased markers and display the results in a heatmap of 
+    individual marker depths.
     '''
     input:
         subset = rules.medaka_subset.output,
@@ -49,6 +52,9 @@ rule medaka_subset_plot:
 
 rule medaka_update_popmap:
     '''
+    Update the groups info file for the two individuals identified as
+    sex-reversed females. The identifier for these two individuals is given
+    in the config file field 'medaka_male_outliers'
     '''
     input:
         'results/radsex/oryzias_latipes/popmap.tsv'
@@ -66,6 +72,7 @@ rule medaka_update_popmap:
 
 rule medaka_update_distrib:
     '''
+    Re-run radsex distrib with the updated popmap.
     '''
     input:
         markers_table = 'results/radsex/oryzias_latipes/markers_table.tsv',
@@ -93,6 +100,8 @@ rule medaka_update_distrib:
 
 rule medaka_distrib_plot:
     '''
+    Generate a tile plot of distribution of markers between males and females
+    from the results of radsex distrib with the updated popmap.
     '''
     input:
         rules.medaka_update_distrib.output
@@ -110,6 +119,7 @@ rule medaka_distrib_plot:
 
 rule medaka_update_signif:
     '''
+    Extract markers significantly associated with sex with the updated popmap.
     '''
     input:
         markers_table = 'results/radsex/oryzias_latipes/markers_table.tsv',
@@ -138,6 +148,7 @@ rule medaka_update_signif:
 
 rule medaka_map:
     '''
+    Align markers to the genome of Oryzias latipes using the updated popmap.
     '''
     input:
         markers_table = 'results/radsex/oryzias_latipes/markers_table.tsv',
@@ -167,6 +178,8 @@ rule medaka_map:
 
 rule medaka_map_plot:
     '''
+    Generate circos and manhattan plots from the results of radsex map for the
+    Oryzias latipes dataset
     '''
     input:
         rules.medaka_map.output
