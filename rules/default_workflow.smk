@@ -78,8 +78,8 @@ rule depth_plot:
     conda:
         '../envs/workflow.yaml'
     resources:
-        mem_mb = config['resources']['default']['mem_mb'],
-        runtime_s = config['resources']['default']['runtime_s']
+        mem_mb = config['resources']['highmem']['mem_mb'],
+        runtime_s = config['resources']['highmem']['runtime_s']
     script:
         '../scripts/depth_plot.R'
 
@@ -128,8 +128,8 @@ rule distrib_plot:
     conda:
         '../envs/workflow.yaml'
     resources:
-        mem_mb = config['resources']['default']['mem_mb'],
-        runtime_s = config['resources']['default']['runtime_s']
+        mem_mb = config['resources']['highmem']['mem_mb'],
+        runtime_s = config['resources']['highmem']['runtime_s']
     script:
         '../scripts/distrib_plot.R'
 
@@ -176,8 +176,8 @@ rule freq_plot:
     conda:
         '../envs/workflow.yaml'
     resources:
-        mem_mb = config['resources']['default']['mem_mb'],
-        runtime_s = config['resources']['default']['runtime_s']
+        mem_mb = config['resources']['highmem']['mem_mb'],
+        runtime_s = config['resources']['highmem']['runtime_s']
     script:
         '../scripts/freq_plot.R'
 
