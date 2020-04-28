@@ -3,3 +3,4 @@ results/
 benchmarks/
 venv/
 .snakemake/
+scripts/__pycache__/
