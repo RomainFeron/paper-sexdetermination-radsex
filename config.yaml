@@ -30,7 +30,7 @@ resources:  # Define resources, mostly used when running on an HPC
         runtime_s: 1800  # 30 minutes
     highmem:
         mem_mb: 12000    # 12 Gb
-        runtime: 600     # 10 minutes
+        runtime_s: 600     # 10 minutes
 
 # Names of the male outliers in oryzias_latipes dataset
 medaka_male_outliers:
