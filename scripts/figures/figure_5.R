@@ -18,6 +18,9 @@ tinca_tinca_file <- snakemake@input$tinca_tinca[[1]]
 png_output_file <- snakemake@output$png[[1]]
 svg_output_file <- snakemake@output$svg[[1]]
 
+# Prevent R from automatically creating the file "Rplots.pdf"
+pdf(NULL)
+
 # Generate distrib plot for each dataset
 cyprinus_carpio_plot <- radsex_distrib(cyprinus_carpio_file,
                                        groups = c("male", "female"),
