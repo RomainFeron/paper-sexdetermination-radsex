@@ -14,10 +14,10 @@ rule medaka_subset:
     conda:
         '../envs/workflow.yaml'
     params:
-        min_depth = 10,
+        min_depth = config['medaka']['min_depth'],
         groups = 'male,female',
-        min_group1 = 20,
-        max_group2 = 0
+        min_group1 = config['medaka']['subset']['min_males'],
+        max_group2 = config['medaka']['subset']['max_females']
     shell:
         'radsex subset '
         '--markers-table {input.markers_table} '
@@ -64,10 +64,19 @@ rule medaka_update_popmap:
         'benchmarks/oryzias_latipes/medaka_update_popmap.tsv'
     log:
         'logs/oryzias_latipes/medaka_update_popmap.txt'
-    conda:
-        '../envs/workflow.yaml'
-    shell:
-        'echo placeholder'
+    params:
+        outliers = config['medaka']['male_outliers']
+    run:
+        input_file = open(input[0])
+        output_file = open(output[0], 'w')
+        for line in input_file:
+            tmp = line.rstrip().split('\t')
+            if tmp[0] in params.outliers:
+                tmp[1] = 'female'
+            output_file.write(f'{tmp[0]}\t{tmp[1]}\n')
+        input_file.close()
+        output_file.close()
+
 
 
 rule medaka_update_distrib:
