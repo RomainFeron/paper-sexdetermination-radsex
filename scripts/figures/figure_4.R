@@ -57,6 +57,6 @@ top_row = cowplot::plot_grid(distrib + ggplot2::theme(legend.position =  "none")
 # Combine top and bottom rows in final figure
 combined = cowplot::plot_grid(top_row, bottom_row, ncol =  1, rel_heights =  c(1, 0.6))
 # Save figure to png and svg
-ggsave(filename = png_output_file, plot =  combined, width =  16, height =  12)
-gsave(filename = svg_output_file, plot = combined, width = 16, height = 12, dpi = 400)
+ggplot2::ggsave(filename = png_output_file, plot =  combined, width =  16, height =  12)
+ggplot2::gsave(filename = svg_output_file, plot = combined, width = 16, height = 12, dpi = 400)
 
