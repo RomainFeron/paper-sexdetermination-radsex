@@ -5,6 +5,7 @@ channels:
 dependencies:
   - radsex=1.1.2
   - r-sgtr=1.1.1
+  - r-svglite=1.2.3
   - sra-tools=2.10.3
   - biopython=1.76
   - requests=2.23.0
