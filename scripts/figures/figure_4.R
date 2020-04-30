@@ -1,8 +1,3 @@
-library(sgtr)
-library(gtable)
-library(gridExtra)
-library(cowplot)
-
 # Get log file path from snakemake and redirect output to log
 log_file_path <- snakemake@log[[1]]
 log_file <- file(log_file_path)
@@ -41,26 +36,26 @@ lg1 <- sgtr:: radsex_map_region(map_file_path,
                                 region = "1")
 
 # Combine legend from distrib and clustering plots
-distrib_legend = get_legend(distrib + theme(legend.margin = margin(5, 0, 5, 0)))
-clustering_legend = get_legend(clustering)
-top_row_legends = plot_grid(distrib_legend, clustering_legend, ncol = 1) + theme(plot.margin = margin(5, 5, 40, 5))
-clustering = gtable_remove_grobs(clustering, "guide-box")
-clustering = gtable_squash_cols(clustering, c(9, 10, 11))
+distrib_legend = cowplot::get_legend(distrib + ggplot2::theme(legend.margin = ggplot2::margin(5, 0, 5, 0)))
+clustering_legend = cowplot::get_legend(clustering)
+top_row_legends = cowplot::plot_grid(distrib_legend, clustering_legend, ncol = 1) + ggplot2::theme(plot.margin = ggplot2::margin(5, 5, 40, 5))
+clustering = gridExtra::gtable_remove_grobs(clustering, "guide-box")
+clustering = gridExtra::gtable_squash_cols(clustering, c(9, 10, 11))
 
 # Combine manhattan and lg1 plots for bottom row
-bottom_row = plot_grid(manhattan,
-                       lg1$association + theme(axis.title.x = element_text(face="bold"),
-                                                    axis.text = element_text(face="bold")),
-                       ncol=2, label_size = 24, hjust=0.5, label_x=c(0.025, 0.025),
-                       labels = c("C", "D"))
+bottom_row = cowplot::plot_grid(manhattan,
+                                lg1$association + ggplot2::theme(axis.title.x = element_text(face="bold"),
+                                                                 axis.text = element_text(face="bold")),
+                                ncol=2, label_size = 24, hjust=0.5, label_x=c(0.025, 0.025),
+                                labels = c("C", "D"))
 
 # Combine distrib and clustering plots for top row
-top_row = plot_grid(distrib + theme(legend.position = "none"), top_row_legends, clustering,
-                    labels=c("A", "", "B"), ncol=3, rel_widths = c(1.05, 0.15, 0.95),
-                    label_size = 24, hjust=0.5, label_x=c(0.025, 0, 0.025))
+top_row = cowplot::plot_grid(distrib + ggplot2::theme(legend.position = "none"), top_row_legends, clustering,
+                             labels=c("A", "", "B"), ncol=3, rel_widths = c(1.05, 0.15, 0.95),
+                             label_size = 24, hjust=0.5, label_x=c(0.025, 0, 0.025))
 
 # Combine top and bottom rows in final figure
-combined = plot_grid(top_row, bottom_row, ncol=1, rel_heights = c(1, 0.6))
+combined = cowplot::plot_grid(top_row, bottom_row, ncol=1, rel_heights = c(1, 0.6))
 
 # Save figure to png and svg
 ggsave(filename=png_output_file, plot = combined, width=16, height=12)
