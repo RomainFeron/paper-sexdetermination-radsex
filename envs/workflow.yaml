@@ -3,7 +3,7 @@ channels:
   - conda-forge
   - bioconda
 dependencies:
-  - radsex=1.1.1
+  - radsex=1.1.2
   - r-sgtr=1.1.1
   - sra-tools=2.10.3
   - biopython=1.76
