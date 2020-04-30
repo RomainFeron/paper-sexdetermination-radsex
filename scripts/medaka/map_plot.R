@@ -20,5 +20,5 @@ p <- sgtr:: radsex_map_circos(input_file_path,
 
 p <- sgtr:: radsex_map_manhattan(input_file_path,
                                  chromosomes_file = chromosomes_file_path,
-                                 show_lgs_as_numbers = TRUE,
+                                 chromosomes_as_numbers = TRUE,
                                  output_file = manhattan_file_path)
