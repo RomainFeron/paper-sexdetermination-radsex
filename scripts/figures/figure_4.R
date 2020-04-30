@@ -37,7 +37,7 @@ lg1 <- sgtr:: radsex_map_region(map_file_path,
 
 # Combine legend from distrib and clustering plots
 distrib_legend = cowplot::get_legend(distrib + ggplot2::theme(legend.margin =  ggplot2::margin(5, 0, 5, 0)))
-lustering_legend = cowplot::get_legend(clustering)
+clustering_legend = cowplot::get_legend(clustering)
 top_row_legends = cowplot::plot_grid(distrib_legend, clustering_legend, ncol =  1) + ggplot2::theme(plot.margin =  ggplot2::margin(5, 5, 40, 5))
 lustering = cowplot::gtable_remove_grobs(clustering, "guide-box")
 clustering = cowplot::gtable_squash_cols(clustering, c(9, 10, 11))
