@@ -13,8 +13,8 @@ manhattan_file_path <- snakemake@output$manhattan[[1]]
 pdf(NULL)
 
 # Clustered heatmap of depth of each marker in each individual
-p <- sgtr:: radsex_map_circos(input_file,
+p <- sgtr:: radsex_map_circos(input_file_path,
                               output_file = circos_file_path)
 
-p <- sgtr:: radsex_map_manhattan(input_file,
+p <- sgtr:: radsex_map_manhattan(input_file_path,
                                  output_file = manhattan_file_path)
