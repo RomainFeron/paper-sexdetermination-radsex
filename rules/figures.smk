@@ -26,7 +26,8 @@ rule figure_4:
         distrib = 'results/radsex/oryzias_latipes/distrib_10.tsv',
         subset = rules.medaka_subset.output,
         map = rules.medaka_map.output,
-        popmap = 'results/radsex/oryzias_latipes/popmap.tsv'
+        popmap = 'results/radsex/oryzias_latipes/popmap.tsv',
+        chromosomes_file = rules.medaka_chromosomes_file.output
     output:
         png = 'results/figures/figure_4.png',
         svg = 'results/figures/figure_4.svg'

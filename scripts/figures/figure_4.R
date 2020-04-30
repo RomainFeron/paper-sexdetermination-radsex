@@ -9,6 +9,7 @@ distrib_file_path <- snakemake@input$distrib[[1]]
 subset_file_path <- snakemake@input$subset[[1]]
 map_file_path <- snakemake@input$map[[1]]
 popmap_file_path <- snakemake@input$popmap[[1]]
+chromosomes_file_path <- snakemake@input$chromosomes_file[[1]]
 png_output_file <- snakemake@output$png[[1]]
 svg_output_file <- snakemake@output$svg[[1]]
 
@@ -29,11 +30,14 @@ clustering <- sgtr:: radsex_marker_depths(subset_file_path,
                                           distance_method = 'binary')
 
 # Generate manhattan plot
-manhattan <- sgtr:: radsex_map_manhattan(map_file_path)
+manhattan <- sgtr::radsex_map_manhattan(input_file_path,
+                                        chromosomes_file = chromosomes_file_path,
+                                        chromosomes_as_numbers = TRUE)[[1]]
 
 # Generate alignment metrics plot for LG1
-lg1 <- sgtr:: radsex_map_region(map_file_path,
-                                region = "1")
+lg1 <- sgtr::radsex_map_region(map_file_path,
+                               chromosomes_file = chromosomes_file_path,
+                               region = "1")[[1]]
 
 # Combine legend from distrib and clustering plots
 distrib_legend = cowplot::get_legend(distrib + ggplot2::theme(legend.margin =  ggplot2::margin(5, 0, 5, 0)))

@@ -217,7 +217,7 @@ rule medaka_map_plot:
     '''
     input:
         map_results = rules.medaka_map.output,
-        chromosomes_names = rules.medaka_chromosomes_file.output
+        chromosomes_file = rules.medaka_chromosomes_file.output
     output:
         circos = 'results/radsex/oryzias_latipes/map_circos.png',
         manhattan = 'results/radsex/oryzias_latipes/map_manhattan.png'
