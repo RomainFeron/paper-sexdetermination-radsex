@@ -95,4 +95,9 @@ rule download_genome:
     params:
         url = lambda wildcards: config['info'][wildcards.dataset]['genome']
     shell:
-        'wget -O- {params.url} > {output} 2> {log}'
+        'wget -O- {params.url} > .tmp_genome 2> {log}; \\\n'
+        'if $(file .tmp_genome | grep -q "gzip"); then \\\n'
+        '   gzip -dc .tmp_genome > {output} 2>> {log}; rm -f .tmp_genome; \\\n'
+        'else \\\n'
+        '   mv .tmp_genome > {output} 2>> {log}; \\\n'
+        'fi'

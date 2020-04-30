@@ -185,13 +185,39 @@ rule medaka_map:
         '2> {log}'
 
 
+rule medaka_chromosomes_file:
+    '''
+    Generate a chromosome names file from the fasta headers for the medaka
+    genome.
+    '''
+    input:
+        'results/radsex/oryzias_latipes/genome/genome.fa'
+    output:
+        'results/radsex/oryzias_latipes/genome/chromosomes.tsv'
+    benchmark:
+        'benchmarks/oryzias_latipes/medaka_chromosomes_file.tsv'
+    log:
+        'logs/oryzias_latipes/medaka_chromosomes_file.txt'
+    run:
+        input_file = open(input[0])
+        output_file = open(output[0], 'w')
+        for line in input_file:
+            if line.startswith('>') and 'chromosome' in line and '>MT' not in line:
+                chr_id = line.split(' ')[0][1:]
+                chr_name = f'Ola{chr_id}'
+                output_file.write(f'{chr_id}\t{chr_name}\n')
+        input_file.close()
+        output_file.close()
+
+
 rule medaka_map_plot:
     '''
     Generate circos and manhattan plots from the results of radsex map for the
     Oryzias latipes dataset
     '''
     input:
-        rules.medaka_map.output
+        map_results = rules.medaka_map.output,
+        chromosomes_names = rules.medaka_chromosomes_file.output
     output:
         circos = 'results/radsex/oryzias_latipes/map_circos.png',
         manhattan = 'results/radsex/oryzias_latipes/map_manhattan.png'
