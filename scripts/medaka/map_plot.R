@@ -5,7 +5,8 @@ sink(log_file, append=TRUE)
 sink(log_file, append=TRUE, type="message")
 
 # Get other info from snakemake
-input_file_path <- snakemake@input[[1]]
+input_file_path <- snakemake@input$map_results[[1]]
+chromosomes_file_path <- snakemake@input$chromosomes_names[[1]]
 circos_file_path <- snakemake@output$circos[[1]]
 manhattan_file_path <- snakemake@output$manhattan[[1]]
 
@@ -14,7 +15,10 @@ pdf(NULL)
 
 # Clustered heatmap of depth of each marker in each individual
 p <- sgtr:: radsex_map_circos(input_file_path,
+                              chromosomes_file = chromosomes_file_path,
                               output_file = circos_file_path)
 
 p <- sgtr:: radsex_map_manhattan(input_file_path,
+                                 chromosomes_file = chromosomes_file_path,
+                                 show_lgs_as_numbers = TRUE,
                                  output_file = manhattan_file_path)
