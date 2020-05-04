@@ -34,7 +34,7 @@ def download_dataset_input(wildcards):
     '''
     checkpoints.get_dataset.get(dataset=wildcards.dataset)
     reads_file = 'results/radsex/{dataset}/samples/{sample}.fq.gz'
-    samples = glob_wildcards(f'results/{wildcards.dataset}/.download/{{sample}}.accession').sample
+    samples = glob_wildcards(f'results/radsex/{wildcards.dataset}/.download/{{sample}}.accession').sample
     all_samples = expand(reads_file, dataset=wildcards.dataset, sample=samples)
     return all_samples
 
