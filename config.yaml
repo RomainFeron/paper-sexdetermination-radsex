@@ -20,17 +20,27 @@ params:
     signif:
         output-fasta: true
 
-resources:  # Define resources, mostly used when running on an HPC
+# Stacks parameters
+stacks:
+    M: 3
+    n: 2
+
+# Define resources, mostly used when running on an HPC
+resources:
     process:
         threads: 4
-        mem_mb: 20000    # 20 Gb
-        runtime_s: 7200  # 2 hours
+        mem_mb: 20000     # 20 Gb
+        runtime_s: 7200   # 2 hours
     default:
-        mem_mb: 4000     # 4 Gb
-        runtime_s: 1800  # 30 minutes
+        mem_mb: 4000      # 4 Gb
+        runtime_s: 1800   # 30 minutes
     highmem:
-        mem_mb: 12000    # 12 Gb
-        runtime_s: 600     # 10 minutes
+        mem_mb: 12000     # 12 Gb
+        runtime_s: 600    # 10 minutes
+    stacks:
+        threads: 4
+        mem_mb: 64000     # 64 Gb
+        runtime_s: 172800 # 2 days
 
 # Names of the male outliers in oryzias_latipes dataset
 medaka:
