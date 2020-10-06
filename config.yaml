@@ -58,7 +58,7 @@ default_settings_file: 'cfg/defaults.yaml'
 
 # Config for NCBI queries; you can add your email and you api key if you have one
 ncbi:
-    api_key: 
-    email: xxx@yyy.com
+    api_key: 9b747e0153782a735ef80e1ded2e7618be08
+    email: romain.feron.91@gmail.com
     max_tries: 10
     sleep_between_tries: 1
