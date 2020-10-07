@@ -17,9 +17,9 @@ rule supp_table_4:
     params:
         benchmarks_dir = 'benchmarks',
         min_depth = 1,
-        datasets = config['info'].keys()
+        datasets = [d for d in config['info'].keys()]
     script:
-        '../scripts/tables/supp_table_4.py'
+        '../scripts/supp_table_4.py'
 
 
 rule supp_table_6:
@@ -43,4 +43,4 @@ rule supp_table_6:
     conda:
         '../envs/workflow.yaml'
     script:
-        '../scripts/tables/supp_table_6.py'
+        '../scripts/supp_table_6.py'
