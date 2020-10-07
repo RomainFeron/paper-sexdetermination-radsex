@@ -99,5 +99,5 @@ rule download_genome:
         'if $(file .tmp_genome | grep -q "gzip"); then \\\n'
         '   gzip -dc .tmp_genome > {output} 2>> {log}; rm -f .tmp_genome; \\\n'
         'else \\\n'
-        '   mv .tmp_genome > {output} 2>> {log}; \\\n'
+        '   mv .tmp_genome {output} 2>> {log}; \\\n'
         'fi'
