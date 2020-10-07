@@ -30,7 +30,7 @@ if __name__ == '__main__':
     logging.info('Creating output file')
 
     output_file = open(output_file_path, 'w')
-    output_file.write('dataset\tprocess_runtime\tdistrib_runtime\tsignif_runtime\tprocess_mem\tdistrib_mem\tsignif_mem\n')
+    output_file.write('dataset\treads\tprocess_runtime\tdistrib_runtime\tsignif_runtime\tprocess_mem\tdistrib_mem\tsignif_mem\n')
 
     logging.info('Getting data from benchmark files')
 
@@ -39,9 +39,13 @@ if __name__ == '__main__':
         process_file = open(os.path.join(benchmarks_base_dir, dataset, 'process.tsv'))
         distrib_file = open(os.path.join(benchmarks_base_dir, dataset, f'distrib_{min_depth}.tsv'))
         signif_file = open(os.path.join(benchmarks_base_dir, dataset, f'signif_{min_depth}.tsv'))
-        fields = [0] * 7
+        depth_file = open(os.path.join(benchmarks_base_dir, dataset, f'depth.tsv'))
+        depth_file.readline()
+        reads = sum((int(line.split('\t')[2]) for line in depth_file))
+        fields = [0] * 8
         fields[0] = dataset
-        fields[1], fields[4] = get_resources(process_file)
-        fields[2], fields[5] = get_resources(distrib_file)
-        fields[3], fields[6] = get_resources(signif_file)
+        fields[1] = reads
+        fields[2], fields[5] = get_resources(process_file)
+        fields[3], fields[6] = get_resources(distrib_file)
+        fields[4], fields[7] = get_resources(signif_file)
         output_file.write('\t'.join(fields) + '\n')
