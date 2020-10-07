@@ -45,7 +45,7 @@ if __name__ == '__main__':
         reads = sum((int(line.split('\t')[2]) for line in depth_file))
         fields = [0] * 8
         fields[0] = dataset
-        fields[1] = reads
+        fields[1] = str(reads)
         fields[2], fields[5] = get_resources(process_file)
         fields[3], fields[6] = get_resources(distrib_file)
         fields[4], fields[7] = get_resources(signif_file)
