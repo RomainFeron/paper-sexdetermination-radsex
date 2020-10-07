@@ -23,6 +23,7 @@ if __name__ == '__main__':
     logging.info('Getting info from snakemake')
     # Get data from snakemake
     benchmarks_base_dir = snakemake.params.benchmarks_dir
+    radsex_base_dir = snakemake.params.radsex_dir
     min_depth = snakemake.params.min_depth
     datasets = snakemake.params.datasets
     output_file_path = snakemake.output[0]
@@ -39,7 +40,7 @@ if __name__ == '__main__':
         process_file = open(os.path.join(benchmarks_base_dir, dataset, 'process.tsv'))
         distrib_file = open(os.path.join(benchmarks_base_dir, dataset, f'distrib_{min_depth}.tsv'))
         signif_file = open(os.path.join(benchmarks_base_dir, dataset, f'signif_{min_depth}.tsv'))
-        depth_file = open(os.path.join(benchmarks_base_dir, dataset, f'depth.tsv'))
+        depth_file = open(os.path.join(radsex_base_dir, dataset, f'depth.tsv'))
         depth_file.readline()
         reads = sum((int(line.split('\t')[2]) for line in depth_file))
         fields = [0] * 8

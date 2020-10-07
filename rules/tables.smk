@@ -16,6 +16,7 @@ rule supp_table_4:
         '../envs/workflow.yaml'
     params:
         benchmarks_dir = 'benchmarks',
+        radsex_dir = os.path.join('results', 'radsex'),
         min_depth = 1,
         datasets = [d for d in config['info'].keys()]
     script:
