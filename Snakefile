@@ -10,8 +10,8 @@ include: 'rules/default_workflow.smk'
 include: 'rules/medaka.smk'
 include: 'rules/gadus_morhua.smk'
 include: 'rules/stacks.smk'
-include: 'rules/figures.smk'
 include: 'rules/tables.smk'
+include: 'rules/figures.smk'
 
 
 def all_input(wildcards):

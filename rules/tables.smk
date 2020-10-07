@@ -2,8 +2,10 @@
 rule supp_table_4:
     '''
     Generate supplementary table 4 from the radsex paper, i.e. runtime and
-    peak memory usage on each dataset for radsex and stacks.
+    peak memory usage on each dataset.
     '''
+    input:
+        expand(rules.default_workflow.output, dataset=config['info'].keys())
     output:
         'results/tables/supp_table_4.tsv'
     benchmark:
@@ -12,6 +14,10 @@ rule supp_table_4:
         'logs/tables/supp_table_4.txt'
     conda:
         '../envs/workflow.yaml'
+    params:
+        benchmarks_dir = 'benchmarks',
+        min_depth = 1,
+        datasets = config['info'].keys()
     script:
         '../scripts/tables/supp_table_4.py'
 
