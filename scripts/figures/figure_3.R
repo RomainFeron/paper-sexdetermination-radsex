@@ -1,9 +1,3 @@
-library(readr)
-library(ggplot2)
-library(reshape2)
-library(ggrepel)
-library(cowplot)
-
 # Get log file path from snakemake and redirect output to log
 log_file_path <- snakemake@log[[1]]
 log_file <- file(log_file_path)
@@ -37,7 +31,7 @@ names(x_axis_scale) <- round(seq(min(stats$reads), max(stats$reads), (max(stats$
 runtime_data <- stats[, c("total_runtime", "dataset", "reads", "name")]
 runtime_plot <- ggplot2::ggplot(runtime_data, ggplot2::aes(x = reads, y = total_runtime / 60)) +
     ggplot2::geom_point(size=3) +
-    ggplot2::geom_text_repel(ggplot2::aes(label=name), force=6, box.padding = 0.4, fontface="italic") +
+    ggrepel::geom_text_repel(ggplot2::aes(label=name), force=6, box.padding = 0.4, fontface="italic") +
     ggplot2::scale_y_continuous(limits = c(0, 1.1 * max(runtime_data$total_runtime / 60)), expand = c(0, 0),
                                 name = "RADSex total runtime (minutes)") +
     ggplot2::scale_x_continuous(name = "Millions of RAD-tags", limits = c(min(runtime_data$reads), max(runtime_data$reads)),
@@ -56,7 +50,7 @@ runtime_plot <- ggplot2::ggplot(runtime_data, ggplot2::aes(x = reads, y = total_
 memory_data <- stats[, c("total_memory", "dataset", "reads", "name")]
 memory_plot <- ggplot2::ggplot(memory_data, ggplot2::aes(x = reads, y = total_memory / 10^3)) +
     ggplot2::geom_point(size=3) +
-    ggplot2::geom_text_repel(ggplot2::aes(label=name), force=6, box.padding = 0.4, fontface="italic") +
+    ggrepel::geom_text_repel(ggplot2::aes(label=name), force=6, box.padding = 0.4, fontface="italic") +
     ggplot2::scale_y_continuous(limits = c(0, 1.2*max(memory_data$total_memory / 10^3)), expand = c(0, 0),
                                 name = "RADSex peak memory (Gb)") +
     ggplot2::scale_x_continuous(name = "Millions of RAD-tags", limits = c(min(memory_data$reads), max(memory_data$reads)),
@@ -74,5 +68,6 @@ memory_plot <- ggplot2::ggplot(memory_data, ggplot2::aes(x = reads, y = total_me
 combined = cowplot::plot_grid(runtime_plot, memory_plot, ncol = 2,
                               labels = c("A", "B"), label_fontface = "bold", label_size = 24, align="hv")
 
-cowplot::ggsave("figure4_performance.png", combined, width=15, height=8)
+ggplot2::ggsave(png_output_file, combined, width=15, height=8)
+ggplot2::ggsave(svg_output_file, combined, width=15, height=8)
 
