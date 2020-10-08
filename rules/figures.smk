@@ -4,6 +4,8 @@ rule figure_3:
     Generate figure 3 from the radsex paper, i.e. performance comparison
     between stacks and radsex.
     '''
+    input:
+        rules.supp_table_4.output
     output:
         png = 'results/figures/figure_3.png',
         svg = 'results/figures/figure_3.svg'
