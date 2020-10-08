@@ -44,7 +44,10 @@ def get_options(command, wildcards):
     initialized in the populate_command_config() function.
     '''
     options = []
-    for option, value in config['commands'][command].items():
+    option_values = config['commands'][command]
+    if hasattr(wildcards, 'min_depth'):
+        option_values['min-depth'] = wildcards.min_depth
+    for option, value in option_values.items():
         if isinstance(value, bool):
             if value:
                 options.append(f'--{option}')
